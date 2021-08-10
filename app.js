@@ -1,28 +1,17 @@
 const express = require('express');
 const app = express();
-const port = 8080;
+
 const path = require('path');
+const PORT = process.env.PORT || 8080;
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, '/index.html'));
-});
+//Serve Static Files
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/home", (req, res) => {
-    res.sendFile(path.join(__dirname, '/index.html'));
-});
-
-app.get("/about", (req, res) => {
-    res.sendFile(path.join(__dirname, '/about.html'));
-});
-
-app.get("/contact", (req, res) => {
-    res.sendFile(path.join(__dirname, '/contact.html'));
-});
-
+//Serve Error File On 404
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, '404.html'))
+  res.sendFile(path.join(__dirname, '404.html'))
 });
 
-app.listen(port, "localhost", () => {
-    console.log(`Example app listening on port ${port}!`)
+app.listen(PORT, "localhost", () => {
+    console.log(`Example app listening on PORT ${PORT}!`)
   }); 
